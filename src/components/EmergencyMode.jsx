@@ -1,4 +1,6 @@
+
 import React from 'react';
+import './EmergencyMode.css'; 
 
 function EmergencyMode() {
   const handleEmergency = () => {

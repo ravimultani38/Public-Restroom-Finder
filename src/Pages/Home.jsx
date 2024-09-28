@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import backgroundImage from "../assets";
+import { useNavigate } from 'react-router-dom'; 
+
+
 
 function Home() {
-  // State to hold the search input
   const [location, setLocation] = useState('');
-  const sectionStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh' // or whatever height you prefer
-  };
-
+  const navigate = useNavigate(); 
   const handleEmergency = () => {
     alert('Emergency Mode Activated! Searching for the nearest restroom...');
   };
@@ -21,7 +16,10 @@ function Home() {
       return;
     }
     alert(`Searching for restrooms near: ${location}`);
-    // Here you can implement your logic to search for restrooms based on the entered location
+  };
+
+  const handleLoginSignup = () => {
+    navigate('/login-signup'); 
   };
 
   return (
@@ -32,16 +30,24 @@ function Home() {
           <a href="/">Home</a>
           <a href="/find-restrooms">Find Restrooms</a>
           <a href="/about-us">About Us</a>
-          <button className="login-button">Sign Up / Login</button>
         </nav>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Enter location..."
+            className="search-bar"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+          <button className="find-button" onClick={handleFindRestrooms}>Find</button>
+          <button className="login-button" onClick={handleLoginSignup}>Sign Up / Login</button>
+        </div>
       </header>
 
       <section className="hero">
         <div className="hero-content">
           <h1>Find Clean Public Restrooms Near You</h1>
           <h2>Locate, Rate, and Review Restrooms with Real-Time Data</h2>
-          <input type="text" placeholder="Enter location..." className="search-bar" />
-          <button className="find-button">Find Restrooms</button>
           <button onClick={handleEmergency} className="emergency-button">Emergency Mode 🚽</button>
         </div>
       </section>
@@ -67,10 +73,10 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <footer>
-        <p>Built with ❤️ by our community of restroom finders.</p>
-      </footer>
+      <footer class="footer">
+  <div class="footer-left">Built with ❤️ by our community of restroom finders.</div>
+  <div class="footer-right">© 2024 Public Restroom Finder. All rights reserved.</div>
+</footer>
     </div>
   );
 }

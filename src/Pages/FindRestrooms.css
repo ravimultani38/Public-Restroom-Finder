@@ -1,0 +1,100 @@
+.find-restrooms-body {
+              background-image: url('../assets/jesse-collins-qIwFIwxl3CI-unsplash.jpg');
+              background-size: cover; 
+              background-position: center; 
+              background-attachment: fixed; 
+              height: 100vh; 
+              display: flex; 
+              justify-content: center;
+              align-items: center; 
+              margin: 0; 
+            }
+            
+            .find-restrooms-container {
+              background: rgba(255, 255, 255, 0.9); 
+              padding: 40px;
+              border-radius: 15px;
+              box-shadow: 0 15px 30px rgba(0, 0, 0, 0.836);
+              text-align: center;
+              max-width: 400px;
+              transform-style: preserve-3d;
+              transition: transform 0.4s ease;
+            }
+            
+            .find-restrooms-container:hover {
+              transform: rotateY(10deg) translateZ(10px);
+            }
+            
+            .find-restrooms-title {
+              color: #2c3e50; 
+              margin-bottom: 20px;
+              font-weight: 600;
+              animation: slideIn 0.5s forwards;
+            }
+            
+            @keyframes slideIn {
+              from {
+                transform: translateY(-20px);
+                opacity: 0;
+              }
+              to {
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+            
+            .find-restrooms-input {
+              padding: 12px;
+              border: 2px solid #ffffff;
+              border-radius: 8px;
+              width: 100%;
+              margin-bottom: 20px;
+              font-size: 16px;
+              transition: border-color 0.3s, box-shadow 0.3s;
+            }
+            
+            .find-restrooms-input:focus {
+              outline: none;
+              border-color: #ff0000; 
+              box-shadow: 0 0 10px rgba(41, 128, 185, 0.5); 
+            }
+            
+            .find-restrooms-button {
+              background-color: #b92929; 
+              color: white;
+              border: none;
+              border-radius: 8px;
+              padding: 12px 24px;
+              font-size: 18px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              position: relative;
+            }
+            
+            .find-restrooms-button::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 8px;
+              transform: translateZ(-1px) scale(0.9);
+              transition: transform 0.3s ease;
+              z-index: 0;
+            }
+            
+            .find-restrooms-button:hover {
+              background-color: #ff0000; 
+              transform: translateY(-3px);
+            }
+            
+            .find-restrooms-button:active {
+              transform: translateY(1px);
+            }
+            
+            .find-restrooms-button:hover::before {
+              transform: translateZ(-2px) scale(1);
+            }
+            

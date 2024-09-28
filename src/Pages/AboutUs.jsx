@@ -24,6 +24,7 @@ function AboutUs() {
       </p>
       <p>We aim to make public spaces more accessible, one restroom at a time!</p>
     </div>
+
   );
 }
 
