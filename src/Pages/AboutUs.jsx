@@ -3,28 +3,28 @@ import './AboutUs.css';
 
 function AboutUs() {
   return (
-    <div className="about-us-container">
-      <h2>About Us</h2>
-      <p>
-        Welcome to the <strong>Public Restroom Finder</strong> app! 
-        Our mission is to help users easily locate clean and accessible public restrooms, no matter where they are.
-      </p>
-      <p>
-        Whether you're traveling, out for a day of shopping, or simply need to find the nearest restroom, our app provides a fast and reliable way to locate one.
-        We are committed to making the search for restrooms easier and more convenient for everyone.
-      </p>
-      <p>
-        Our features include:
-        <ul>
-          <li>Location-based restroom search</li>
-          <li>Cleanliness ratings and reviews</li>
-          <li>Accessibility options for disabled users</li>
-          <li>Real-time updates on restroom availability</li>
-        </ul>
-      </p>
-      <p>We aim to make public spaces more accessible, one restroom at a time!</p>
+    <div className="about-us-body">
+      <div className="about-us-container">
+        <h2>About Us</h2>
+        <p>
+          Welcome to <strong>Public Restroom Near Me</strong>! Our mission is to address a common challenge faced by rideshare and taxi drivers in New York City: finding free, clean, and safe restrooms. We aim to collaborate with local rideshare and yellow cab drivers to improve restroom accessibility for everyone in need.
+        </p>
+        <p>
+          Whether you're a driver on a long shift, a traveler exploring the city, or anyone in urgent need of a restroom, our platform connects you to nearby facilities. We partner with local businesses, parks, and public spaces to ensure that restrooms are available when you need them most.
+        </p>
+        <p>
+          <br/>
+          Our features include:
+          <ul>
+            <li>Location-based restroom search</li>
+            <li>Cleanliness ratings and reviews</li>
+            <li>Accessibility options for disabled users</li>
+            <li>Real-time updates on restroom availability</li>
+          </ul>
+        </p>
+        <p>We are committed to enhancing public space accessibility and improving quality of life for both drivers and the general public. Join us in making New York City more accommodating, one restroom at a time!</p>
+      </div>
     </div>
-
   );
 }
 

@@ -11,13 +11,13 @@
   .about-us-container h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #000000;
   }
   
   .about-us-container p {
     font-size: 1.2rem;
     line-height: 1.6;
-    color: #555;
+    color: #000000;
     margin-bottom: 1.5rem;
   }
   
@@ -38,3 +38,14 @@
     }
   }
   
+  .about-us-body{
+    background-image: url(../assets/pan-xiaozhen-OKlo0r3gBcQ-unsplash.jpg) ;
+    background-size: cover; 
+              background-position: center; 
+              background-attachment: fixed; 
+              height: 100vh; 
+              display: flex; 
+              justify-content: center;
+              align-items: center; 
+              margin: 0; 
+  }
