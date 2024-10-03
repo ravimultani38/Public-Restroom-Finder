@@ -17,7 +17,9 @@ const Popup = ({ content, position, show, onClose }) => {
             </div>
             <div className="card-body">
                 <p className="card-text" dangerouslySetInnerHTML={{ __html: content }} />
+               
                 <a
+                
                     href={`https://www.google.com/maps/dir/?api=1&destination=${content.split('<br>')[1].split(': ')[1].split('<')[0]},${content.split('<br>')[2].split(': ')[1]}`}
                     target="_blank"
                     className="btn btn-primary"
