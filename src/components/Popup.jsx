@@ -1,5 +1,3 @@
-// src/components/Popup.jsx
-import React from 'react';
 
 const Popup = ({ content, position, show, onClose }) => {
     if (!show) return null;

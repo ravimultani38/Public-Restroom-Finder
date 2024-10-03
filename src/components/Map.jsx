@@ -1,5 +1,4 @@
-// src/components/Map.jsx
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'ol/ol.css';
 import { Map as OlMap, View, Feature } from 'ol';
 import { fromLonLat, toLonLat } from 'ol/proj';
@@ -19,6 +18,7 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
     const [bathrooms, setBathrooms] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [closestBathrooms, setClosestBathrooms] = useState([]);
+    const [map, setMap] = useState(null); // Store the map object in state
 
     // Function to calculate distance between two coordinates (in miles)
     const calculateDistance = (coord1, coord2) => {
@@ -28,7 +28,6 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
         const lat2 = toRad(coord2[1]);
         const lon2 = toRad(coord2[0]);
 
-        // Distance in kilometers, then convert to miles (1 km = 0.621371 miles)
         return (
             6371 * Math.acos(
                 Math.sin(lat1) * Math.sin(lat2) +
@@ -50,7 +49,6 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
                     hours: bathroom.hours_of_operation || 'Hours not available',
                 }));
 
-                // Hardcoded bathroom locations
                 const hardcodedBathrooms = [
                     { coord: fromLonLat([-74.0060, 40.7128]), name: "New York City, USA" },
                     { coord: fromLonLat([-73.975189, 40.715899]), name: "East River Park Zone 3", hours: "8am-4pm, Open later seasonally" },
@@ -68,7 +66,7 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
     }, []);
 
     useEffect(() => {
-        const map = new OlMap({
+        const mapObject = new OlMap({
             target: mapRef.current,
             layers: [
                 new TileLayer({
@@ -80,6 +78,16 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
                 zoom: 12,
             }),
         });
+
+        setMap(mapObject); // Save the map instance to state
+
+        return () => {
+            mapObject.setTarget(undefined); // Cleanup on component unmount
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!map) return; // Exit if map isn't ready yet
 
         const features = bathrooms.map(bathroom => new Feature({
             geometry: new Point(bathroom.coord),
@@ -103,7 +111,6 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
 
         map.addLayer(vectorLayer);
 
-        // Get user location
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 const userCoordinates = [position.coords.longitude, position.coords.latitude];
@@ -159,16 +166,13 @@ const Map = ({ setPopupContent, setShowPopup, setPopupPosition }) => {
             const hit = map.hasFeatureAtPixel(evt.pixel);
             map.getTargetElement().style.cursor = hit ? 'pointer' : '';
         });
+    }, [bathrooms, map, setPopupContent, setShowPopup, setPopupPosition]);
 
-        return () => map.setTarget(undefined); // Cleanup on component unmount
-    }, [bathrooms, setPopupContent, setShowPopup, setPopupPosition]);
-
-    // Function to navigate to the bathroom location
-    const navigateToBathroom = (coord) => {
-        setPopupContent(`Navigating to ${coord.name}<br>Latitude: ${coord.latLong[1].toFixed(4)}<br>Longitude: ${coord.latLong[0].toFixed(4)}<br>Hours: ${coord.hours}`);
+    const navigateToBathroom = (bathroom) => {
+        setPopupContent(`Navigating to ${bathroom.name}<br>Latitude: ${bathroom.latLong[1].toFixed(4)}<br>Longitude: ${bathroom.latLong[0].toFixed(4)}<br>Hours: ${bathroom.hours}`);
         setShowPopup(true);
         setPopupPosition([mapRef.current.clientWidth / 2, mapRef.current.clientHeight / 2]); // Center the popup
-        map.getView().setCenter(coord.coord);
+        map.getView().setCenter(bathroom.coord);
         map.getView().setZoom(14);
     };
 
