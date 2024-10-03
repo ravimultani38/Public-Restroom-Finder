@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RateTheRestroom from "../components/RateTheRestroom"; 
+import Map from '../components/Map';
+import Popup from '../components/Popup';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Home() {
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
+  const [popupContent, setPopupContent] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupPosition, setPopupPosition] = useState([0, 0]);
 
   const handleEmergency = () => {
     alert("Emergency Mode Activated! Searching for the nearest restroom...");
@@ -63,6 +69,21 @@ function Home() {
           </div>
         </section>
 
+<div className="map">
+<div id="map-container" className="card mx-auto" style={{ maxWidth: '800px', borderRadius: '10px', overflow: 'hidden', margin: '30px auto' }}>
+                <Map
+                    setPopupContent={setPopupContent}
+                    setShowPopup={setShowPopup}
+                    setPopupPosition={setPopupPosition}
+                />
+            </div>
+            <Popup
+                content={popupContent}
+                position={popupPosition}
+                show={showPopup}
+                onClose={() => setShowPopup(false)}
+            />
+</div>
         {/* New Ratings Section */}
         <RateTheRestroom />
 
